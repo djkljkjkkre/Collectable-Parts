@@ -1,0 +1,79 @@
+-- Setup
+
+local hidden_parts_folder_name = "Parts"
+local visible_parts_folder_name = "Parts"
+
+
+local hidden_folder_parent = game.ReplicatedStorage
+local visible_folder_parent = game.Workspace
+
+local coins_per_object = 10
+local coins_multiplier = 1 
+
+local parts_number = 30
+local wait_time = 3
+local anchored_time = 1
+
+local baseplate_X = 100
+local default_Y = 2
+local baseplate_Z = 100
+
+-- code  
+
+
+-- !DO NOT CHANGE IF YOU DON'T KNOW WHAT YOU ARE DOING!
+
+local player = game.Players.LocalPlayer
+
+local baseplate = game.Workspace:FindFirstChild("Baseplate")
+local replicatedStorage = game:GetService("ReplicatedStorage")
+
+local part_parent = Instance.new("Folder")
+part_parent.Parent = visible_folder_parent
+part_parent.Name = visible_parts_folder_name
+
+local new_parent = Instance.new("Folder")
+new_parent.Parent = hidden_folder_parent
+new_parent.Name = hidden_parts_folder_name
+
+for count = 1, parts_number, 1 do
+	
+	local rand_X = math.random(-baseplate_X,baseplate_X)
+	local rand_Z = math.random(-baseplate_Z,baseplate_Z)
+	
+	local default_size = Vector3.new(4,4,4)
+	
+	local part = Instance.new("Part")		
+	part.Name = "Part"..count			
+	part.Anchored = true
+	part.Parent = part_parent		
+	part.Shape = Enum.PartType.Ball		
+	part.Position = Vector3.new(rand_X,default_Y,rand_Z)
+	part.Color = Color3.new(1, 1, 1)	
+	part.Size = default_size
+	part.BackSurface = "Smooth"
+	part.BottomSurface = "Smooth"
+	part.FrontSurface = "Smooth"
+	part.LeftSurface = "Smooth"
+	part.RightSurface = "Smooth"
+	part.TopSurface = "Smooth"
+	part.Material = "Neon"
+	
+	
+	part.Touched:Connect(function(plr)
+		local Player = game:GetService("Players"):GetPlayerFromCharacter(plr.Parent)
+		   if Player then
+			part.Anchored = false
+			part.Parent = new_parent -- go to replicatedStorage
+			Player.leaderstats.Coins.Value = Player.leaderstats.Coins.Value + coins_per_object * coins_multiplier -- leaderboard shit
+			part.Position = Vector3.new(math.random(-baseplate_X,baseplate_X),default_Y,math.random(-baseplate_Z,baseplate_Z)) -- change random position
+			wait(wait_time)	--wait
+			part.Parent = part_parent --go back to workspace
+			part.Anchored = true
+			    
+    	end;
+	end);
+end
+
+
+
