@@ -1,0 +1,26 @@
+local players = game:GetService("Players")
+local local_player = ""
+
+local function onPlayerJoin(player)
+	
+	local leaderstats = Instance.new("Folder")
+	leaderstats.Name = "leaderstats"
+	leaderstats.Parent = player
+ 
+	local coins = Instance.new("IntValue")
+	coins.Name = "Coins"
+	coins.Value = 0
+	coins.Parent = leaderstats
+	
+end
+ 
+players.PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function(character)
+		character:WaitForChild("Humanoid").WalkSpeed = 40
+	end)
+end)
+
+
+
+
+game.Players.PlayerAdded:Connect(onPlayerJoin)
