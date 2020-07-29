@@ -64,11 +64,11 @@ for count = 1, parts_number, 1 do
 		local Player = game:GetService("Players"):GetPlayerFromCharacter(plr.Parent)
 		   if Player then
 			part.Anchored = false
-			part.Parent = new_parent -- go to replicatedStorage
-			Player.leaderstats.Coins.Value = Player.leaderstats.Coins.Value + coins_per_object * coins_multiplier -- leaderboard shit
-			part.Position = Vector3.new(math.random(-baseplate_X,baseplate_X),default_Y,math.random(-baseplate_Z,baseplate_Z)) -- change random position
+			part.Parent = new_parent 
+			Player.leaderstats.Coins.Value = Player.leaderstats.Coins.Value + coins_per_object * coins_multiplier 
+			part.Position = Vector3.new(math.random(-baseplate_X,baseplate_X),default_Y,math.random(-baseplate_Z,baseplate_Z)) 
 			wait(wait_time)	--wait
-			part.Parent = part_parent --go back to workspace
+			part.Parent = part_parent 
 			part.Anchored = true
 			    
     	end;
