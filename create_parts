@@ -71,8 +71,8 @@ for count = 1, parts_number, 1 do
 			part.Parent = part_parent 
 			part.Anchored = true
 			    
-    	end;
-	end);
+    		end
+	end)
 end
 
 
